@@ -6,9 +6,6 @@ module FlannelCookbook
     include CommandGenerators
 
     resource_name :flannel_service
-    provides :flannel_service
-
-    default_action :create
 
     # Reference: https://github.com/coreos/flannel#configuration
     property :configuration, Hash, default: { 'Network' => '10.0.0.1/8' }
