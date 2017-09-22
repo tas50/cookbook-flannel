@@ -7,6 +7,8 @@ module FlannelCookbook
 
     resource_name :flannel_service
 
+    property :container_runtime_service, String, default: 'docker.service'
+
     # Reference: https://github.com/coreos/flannel#configuration
     property :configuration, Hash, default: { 'Network' => '10.0.0.1/8' }
 
@@ -62,7 +64,7 @@ module FlannelCookbook
         Unit: {
           Description: 'Flannel software-defined networking service',
           Documentation: 'https://coreos.com/flannel',
-          After: 'network.target',
+          After: "network.target #{new_resource.container_runtime_service}",
         },
         Service: {
           ExecStart: flanneld_command,
