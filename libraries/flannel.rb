@@ -61,29 +61,31 @@ module FlannelCookbook
     end
 
     action :start do
-      service_file = template "/etc/systemd/system/#{flannel_name}.service" do
-        source 'systemd/flannel.service.erb'
-        owner 'root'
-        group 'root'
-        cookbook 'flannel'
+      systemd_contents = {
+        Unit: {
+          Description: 'Flannel software-defined networking service',
+          Documentation: 'https://coreos.com/flannel',
+          After: 'network.target',
+        },
+        Service: {
+          ExecStart: flanneld_command,
+          Restart: 'always',
+          RestartSec: 5,
+        },
+        Install: {
+          WantedBy: 'multi-user.target',
+        },
+      }
 
-        variables flanneld_command: flanneld_command
-
+      systemd_unit "#{flannel_name}.service" do
+        content(systemd_contents)
         action :create
-
-        notifies :run, 'execute[systemctl daemon-reload]', :immediately
-      end
-
-      execute 'systemctl daemon-reload' do
-        command '/bin/systemctl daemon-reload'
-        action :nothing
+        notifies :restart, "service[#{flannel_name}]", :immediately
       end
 
       service flannel_name do
-        provider Chef::Provider::Service::Systemd
         supports status: true
         action %w(enable start)
-        only_if { ::File.exist? service_file.path }
       end
     end
 

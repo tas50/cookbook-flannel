@@ -6,7 +6,7 @@ maintainer_email 'allan.espinosa@outlook.com'
 source_url 'https://github.com/aespinosa/cookbook-flannel'
 issues_url 'https://github.com/aespinosa/cookbook-flannel/issues'
 
-chef_version '>= 12.5' if respond_to(:chef_version)
+chef_version '>= 12.11' if respond_to(:chef_version)
 
 version '1.1.1'
 
