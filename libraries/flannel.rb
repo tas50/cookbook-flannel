@@ -37,6 +37,8 @@ module FlannelCookbook
     alias v log_level
 
     action :create do
+      package 'tar'
+      
       remote_file 'flannel tarball' do
         path tarball_path
         source 'https://github.com/coreos/flannel/releases/download/v0.5.5'\
