@@ -1,5 +1,5 @@
 # Testing
 
-* Unit tests: minitest
-* Lint tests: RuboCop and Foodcritic
-* Integration tests: test-kitchen
+- Unit tests: minitest
+- Lint tests: Cookstyle and Foodcritic
+- Integration tests: test-kitchen
