@@ -5,15 +5,15 @@ This is a library cookbook that provides resources for setting up
 
 ## Requirements
 
-* Chef 12.5.0 or higher.
+* Chef 12.11 or higher.
 * Network accessible web server hosting the flannel binaries.
 
 ## Platform Support
 
 Tested on the following platforms with test-kitchen:
 
-* debian-8.4
-* centos-7.2
+* debian-8
+* centos-7
 * ubuntu-16.04
 
 ## Usage
