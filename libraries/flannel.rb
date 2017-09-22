@@ -35,13 +35,12 @@ module FlannelCookbook
 
     action :create do
       package 'tar'
-      
+
       remote_file 'flannel tarball' do
         path tarball_path
-        source 'https://github.com/coreos/flannel/releases/download/v0.5.5'\
-               '/flannel-0.5.5-linux-amd64.tar.gz'
-        checksum '78127e165f124a8f8ddf2391f8b775b3'\
-                 '494aec7e693928f78f2328256fe3644c'
+        source 'https://github.com/coreos/flannel/releases/download/v0.9.0'\
+               '/flannel-v0.9.0-linux-amd64.tar.gz'
+        checksum '492c457338681fbabe7d251ddaf04304e1646507de2393bfb038aed8797942ef'
       end
 
       execute 'extract flanneld' do
@@ -92,7 +91,7 @@ module FlannelCookbook
     end
 
     def tarball_path
-      "#{file_cache_path}/flannel-0.5.5-linux-amd64.tar.gz"
+      "#{file_cache_path}/flannel-0.9.0-linux-amd64.tar.gz"
     end
 
     def flannel_name

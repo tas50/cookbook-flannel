@@ -8,7 +8,7 @@ describe command '/usr/sbin/flanneld -version' do
   end
 
   its :stderr do
-    should match(/0.5.5/)
+    should match(/0.9.0/)
   end
 end
 
