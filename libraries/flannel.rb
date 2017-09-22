@@ -45,8 +45,7 @@ module FlannelCookbook
       end
 
       execute 'extract flanneld' do
-        command "tar xvf #{tarball_path} -C #{flanneld_bin_prefix} "\
-                '--wildcards "*/flanneld" --strip-components=1'
+        command "tar xvf #{tarball_path} -C #{flanneld_bin_prefix} flanneld"
         action :nothing
         subscribes :run, 'remote_file[flannel tarball]'
       end
