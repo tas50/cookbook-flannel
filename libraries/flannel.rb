@@ -7,6 +7,14 @@ module FlannelCookbook
 
     resource_name :flannel_service
 
+    property :version, String, default: '0.9.0'
+    property :tarball_url, String,
+      default: lazy { |r|
+        "https://github.com/coreos/flannel/releases/download/v#{r.version}"\
+               "/flannel-v#{r.version}-linux-amd64.tar.gz"
+      }
+    property :checksum, String,
+      default: '492c457338681fbabe7d251ddaf04304e1646507de2393bfb038aed8797942ef'
     property :container_runtime_service, String, default: 'docker.service'
 
     # Reference: https://github.com/coreos/flannel#configuration
@@ -40,9 +48,8 @@ module FlannelCookbook
 
       remote_file 'flannel tarball' do
         path tarball_path
-        source 'https://github.com/coreos/flannel/releases/download/v0.9.0'\
-               '/flannel-v0.9.0-linux-amd64.tar.gz'
-        checksum '492c457338681fbabe7d251ddaf04304e1646507de2393bfb038aed8797942ef'
+        source new_resource.tarball_url
+        checksum new_resource.checksum
       end
 
       execute 'extract flanneld' do
@@ -93,7 +100,7 @@ module FlannelCookbook
     end
 
     def tarball_path
-      "#{file_cache_path}/flannel-0.9.0-linux-amd64.tar.gz"
+      "#{file_cache_path}/flannel-linux-amd64.tar.gz"
     end
 
     def flannel_name
