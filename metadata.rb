@@ -11,5 +11,8 @@ chef_version '>= 12.11' if respond_to(:chef_version)
 version '1.1.1'
 
 supports 'debian', '>= 8.0'
-supports 'centos', '>= 7.0'
 supports 'ubuntu', '>= 16.04'
+supports 'oracle', '>= 7.0'
+supports 'centos', '>= 7.0'
+supports 'scientific', '>= 7.0'
+supports 'redhat', '>= 7.0'
